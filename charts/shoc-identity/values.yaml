@@ -1,0 +1,5 @@
+service:
+  port: 11106
+
+container:
+  port: 11106

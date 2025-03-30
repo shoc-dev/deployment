@@ -1,0 +1,48 @@
+addresses:
+  root: shoc.dev
+  identity: identity.shoc.dev
+  api: api.shoc.dev
+  admin: admin.shoc.dev
+
+image:
+  repository: shoc/shoc/public
+  pullPolicy: IfNotPresent
+  tag: ${SHOC_VERSION}
+  pullSecretEnabled: true
+  registry:
+    name: ghcr.io
+  
+container:
+  restartPolicy: Always
+
+database:
+  setup:
+    username: ${SHOC_DATABASE_USERNAME}
+    password: ${SHOC_DATABASE_PASSWORD}
+    rootPassword: ${SHOC_DATABASE_ROOT_PASSWORD}
+
+datasource:
+  enabled: true
+  server: "shoc-database"
+  port: 11001
+  username: ${SHOC_DATABASE_USERNAME}
+  password: ${SHOC_DATABASE_PASSWORD}
+  database: ${SHOC_DATABASE_NAME}
+
+discovery:
+  enabled: true
+  type: static
+  static:
+    hostingType: docker
+    defaultProtocol: http
+    defaultGrpcProtocol: http
+
+apiDiscovery:
+  enabled: true 
+
+mailing:
+  enabled: true
+  defaultProfile: default
+
+scaling:
+  replicaCount: 1

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+ 
+spec:
+
+  replicas: {{ .Values.scaling.replicaCount }}
+  serviceName: {{ .Chart.Name }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+        
+    spec:
+      {{- if .Values.image.pullSecretEnabled }}
+      imagePullSecrets:
+        - name: "{{ .Chart.Name }}-pull-secret"
+      {{- end }}
+      restartPolicy: {{ .Values.container.restartPolicy }}
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry.name }}/{{ .Values.image.repository }}/{{ .Values.image.name | default .Chart.Name }}:{{ required `Tag is required` .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.container.port }}
+          volumeMounts:
+            - name: "{{ .Chart.Name }}-data-volume"
+              mountPath: /var/lib/mysql
+          envFrom:
+            - secretRef:
+                name: "{{ .Chart.Name }}-setup-secret"
+      volumes:
+        - name: "{{ .Chart.Name }}-data-volume"
+          persistentVolumeClaim:
+            claimName: "{{ .Chart.Name }}-data-pvc"

@@ -1,0 +1,9 @@
+service:
+  port: 11001
+
+container:
+  port: 11001
+
+database:
+  storage: 10Gi
+  storageClass: "shoc-local-storage"

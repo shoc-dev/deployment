@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: "{{ .Chart.Name }}-data-pvc"
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.database.storage }} 
+  storageClassName: {{ .Values.database.storageClass }}
+  selector:
+    matchLabels:
+      use-for: "{{ .Chart.Name }}-data"
