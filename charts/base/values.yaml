@@ -4,6 +4,12 @@ addresses:
   api: api.shoc.dev
   admin: admin.shoc.dev
 
+apiDiscovery:
+  enabled: true
+  protocol: https
+  pathRouting: true 
+  root: api.shoc.dev
+
 image:
   repository: shoc/shoc/public
   pullPolicy: IfNotPresent
@@ -29,6 +35,11 @@ datasource:
   password: ${SHOC_DATABASE_PASSWORD}
   database: ${SHOC_DATABASE_NAME}
 
+identity:
+  m2m:
+    clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
+    clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
+
 discovery:
   enabled: true
   type: static
@@ -36,9 +47,6 @@ discovery:
     hostingType: docker
     defaultProtocol: http
     defaultGrpcProtocol: http
-
-apiDiscovery:
-  enabled: true 
 
 mailing:
   enabled: true

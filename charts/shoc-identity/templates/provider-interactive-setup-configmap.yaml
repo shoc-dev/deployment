@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Chart.Name }}-provider-interactive-setup-configmap"
+data:
+  Identity__InteractiveClient__AccessTokenExpiration: "{{ .Values.identity.interactive.accessTokenExpiration }}"
+  Identity__InteractiveClient__RedirectPaths: {{ include "arrayToSemicolonString" (list .Values.identity.interactive.redirectPaths) | quote }}
+  Identity__InteractiveClient__PostLogoutRedirectPaths: {{ include "arrayToSemicolonString" (list .Values.identity.interactive.postLogoutRedirectPaths) | quote }}
+  Identity__InteractiveClient__RedirectHosts: {{ include "arrayToSemicolonString" (list .Values.identity.interactive.redirectHosts) | quote }}

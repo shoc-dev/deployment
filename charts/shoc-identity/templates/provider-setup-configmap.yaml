@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Chart.Name }}-provider-setup-configmap"
+data:
+  Identity__PublicOrigin: "https://{{ .Values.addresses.identity }}"
+  Identity__Issuer: "https://{{ .Values.addresses.identity }}"

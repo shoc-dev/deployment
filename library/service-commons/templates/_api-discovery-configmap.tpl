@@ -4,5 +4,9 @@ kind: ConfigMap
 metadata:
   name: "{{ .Chart.Name }}-api-discovery-configmap"
 data:
-  Self__ExternalBaseAddress: "https://{{ .Values.addresses.api }}/{{ .Chart.Name }}/"
+  {{- if .Values.apiDiscovery.pathRouting }}
+  Self__ExternalBaseAddress: "{{ .Values.apiDiscovery.protocol }}://{{ .Values.apiDiscovery.root }}/{{ .Chart.Name }}/"
+  {{- else }}
+  Self__ExternalBaseAddress: "{{ .Values.apiDiscovery.protocol }}://{{ .Values.apiDiscovery.root }}/"
+  {{- end }}
 {{- end }}

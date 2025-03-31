@@ -3,3 +3,14 @@ service:
 
 container:
   port: 11106
+
+apiDiscovery:
+  pathRouting: false 
+  root: identity.shoc.dev
+
+identity:
+  interactive:
+    accessTokenExpiration: 300
+    redirectHosts: ["http://localhost", "https://shoc.dev", "https://admin.shoc.dev", "https://identity.shoc.dev"]
+    redirectPaths: ["/signed-in", "/signed-in-silent.html", "/api/auth/callback/shoc"]
+    postLogoutRedirectPaths: ["/signed-out", "/"]

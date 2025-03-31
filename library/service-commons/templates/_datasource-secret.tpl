@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
 type: Opaque
-data:
+stringData:
   DataSource__ConnectionString: "Server={{ .Values.datasource.server }};Port={{ .Values.datasource.port }};Uid={{ .Values.datasource.username }};Pwd={{ .Values.datasource.password }};"
   DataSource__Database: {{ .Values.datasource.database }}
 {{- end }}
