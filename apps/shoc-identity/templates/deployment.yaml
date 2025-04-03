@@ -1,0 +1,3 @@
+{{- if .Values.deployment.simple }}
+{{- include "service-commons.simple-deployment" . }}
+{{- end }}

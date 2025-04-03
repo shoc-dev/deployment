@@ -1,0 +1,39 @@
+container:
+  ports:
+    - name: http
+      containerPort: 11106
+    - name: grpc
+      containerPort: 11110
+
+service:
+  ports:
+    - name: http
+      port: 11106
+      targetPort: http  
+      protocol: TCP
+    - name: http
+      port: 11110
+      targetPort: http  
+      protocol: TCP
+
+apiDiscovery:
+  pathRouting: false 
+  root: identity.shoc.dev
+
+identity:
+  interactive:
+    accessTokenExpiration: 300
+    redirectHosts: ["http://localhost", "https://shoc.dev", "https://admin.shoc.dev", "https://identity.shoc.dev"]
+    redirectPaths: ["/signed-in", "/signed-in-silent.html", "/api/auth/callback/shoc"]
+    postLogoutRedirectPaths: ["/signed-out", "/"]
+
+extraEnvs:
+  - name: provider-interactive-setup-configmap
+    type: configmap
+    prefixed: true 
+  - name: provider-setup-configmap
+    type: configmap
+    prefixed: true
+  - name: provider-m2m-setup-secret
+    type: secret
+    prefixed: true

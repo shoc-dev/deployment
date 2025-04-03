@@ -30,7 +30,13 @@ spec:
           image: "{{ .Values.image.registry.name }}/{{ .Values.image.repository }}/{{ .Values.image.name | default .Chart.Name }}:{{ required `Tag is required` .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.container.port }}
+            {{- range .Values.container.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              {{- if .protocol }}
+              protocol: {{ .protocol }}
+              {{- end }}
+            {{- end }}
           volumeMounts:
             - name: "{{ .Chart.Name }}-data-volume"
               mountPath: /var/lib/mysql

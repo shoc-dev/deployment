@@ -1,0 +1,10 @@
+{{- if and .Values.certManager.solver.dns01.enabled }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "{{ .Chart.Name }}-cf-api-token"
+  namespace: cert-manager
+type: Opaque
+data:
+  api-token: {{ .Values.certManager.solver.dns01.cloudflare.apiToken | b64enc }}
+{{- end }}

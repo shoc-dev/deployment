@@ -17,7 +17,13 @@ image:
   pullSecretEnabled: true
   registry:
     name: ghcr.io
-  
+
+deployment: 
+  simple: true
+
+service:
+  simple: true
+
 container:
   restartPolicy: Always
 

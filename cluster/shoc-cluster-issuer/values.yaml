@@ -1,0 +1,13 @@
+# Note: for microk8s use ingress class "public"
+
+certManager:
+  email: "admin@shoc.dev"
+  solver:
+    http01:
+      enabled: true
+      ingressClass: "public"
+    dns01:
+      enabled: false
+      cloudflare:
+        email: "" 
+        apiToken: ""  

@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "{{ .Chart.Name }}-staging"
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: {{ .Values.certManager.email }}
+    privateKeySecretRef:
+      name: "{{ .Chart.name }}-staging-account-key"
+    {{- if .Values.certManager.solver.http01.enabled }}
+    solvers:
+    - http01:
+        ingress:
+          class: {{ .Values.certManager.solver.http01.ingressClass }}
+    {{- else if .Values.certManager.solver.dns01.enabled }}
+    solvers:
+    - dns01:
+        {{- if .Values.certManager.solver.dns01.cloudflare.apiToken }}
+        cloudflare:
+          email: {{ .Values.certManager.solver.dns01.cloudflare.email }}
+          apiTokenSecretRef:
+            name: "{{ .Chart.Name }}-cf-api-token"
+            key: api-token
+        {{- end }}
+    {{- end }}

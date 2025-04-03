@@ -1,0 +1,3 @@
+{{- if .Values.service.simple }}
+{{- include "service-commons.simple-service" . }}
+{{- end }}

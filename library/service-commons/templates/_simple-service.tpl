@@ -16,7 +16,17 @@ spec:
   clusterIP: None
   
   ports:
-    - protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.container.port }}
+    {{- range .Values.service.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      {{- if .targetPort }}
+      targetPort: {{ .targetPort }}
+      {{- end }}
+      {{- if .protocol }}
+      protocol: {{ .protocol }}
+      {{- end }}
+      {{- if .nodePort }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
+    {{- end }}
 {{- end }}

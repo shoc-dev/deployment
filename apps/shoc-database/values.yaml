@@ -1,0 +1,24 @@
+container:
+  ports:
+    - name: mysql
+      containerPort: 11001
+
+service:
+  ports:
+    - name: mysql
+      port: 11001
+      targetPort: mysql  
+      protocol: TCP
+
+deployment:
+  simple: false
+  
+database:
+  storage: 10Gi
+  storageClass: "shoc-local-storage"
+
+discovery:
+  enabled: false
+
+apiDiscovery:
+  enabled: false
