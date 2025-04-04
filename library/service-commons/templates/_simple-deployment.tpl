@@ -37,6 +37,10 @@ spec:
             - configMapRef:
                 name: {{ .Chart.Name }}-discover-configmap
             {{- end }}
+            {{- if .Values.auth.enabled }}
+            - configMapRef:
+                name: {{ .Chart.Name }}-api-auth-configmap
+            {{- end }}
             {{- if .Values.apiDiscovery.enabled }}
             - configMapRef:
                 name: {{ .Chart.Name }}-api-discovery-configmap
@@ -48,6 +52,10 @@ spec:
             {{- if .Values.datasource.enabled }}
             - secretRef:
                 name: {{ .Chart.Name }}-datasource-secret
+            {{- end }}
+            {{- if .Values.apiClient.enabled }}
+            - secretRef:
+                name: {{ .Chart.Name }}-api-client-secret
             {{- end }}
             {{- range .Values.extraEnvs }}
             {{- $envName := .name -}}

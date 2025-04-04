@@ -21,10 +21,10 @@ datasource:
   password: ${SHOC_DATABASE_PASSWORD}
   database: ${SHOC_DATABASE_NAME}
 
-identity:
-  m2m:
-    clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
-    clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
+apiClient:
+  enabled: true
+  clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
+  clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
 
 discovery:
   enabled: true
@@ -35,6 +35,6 @@ discovery:
     defaultGrpcProtocol: http
 
 mailing:
-  enabled: true
+  enabled: false
   defaultProfile: default
 

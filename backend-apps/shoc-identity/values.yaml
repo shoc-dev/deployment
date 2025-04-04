@@ -11,9 +11,9 @@ service:
       port: 11106
       targetPort: http  
       protocol: TCP
-    - name: http
+    - name: grpc
       port: 11110
-      targetPort: http  
+      targetPort: grpc  
       protocol: TCP
 
 apiDiscovery:
@@ -27,12 +27,18 @@ ingress:
   nginx:
     bodySize: "0"
 
+mailing:
+  enabled: false
+
 identity:
   interactive:
     accessTokenExpiration: 300
     redirectHosts: ["http://localhost", "https://shoc.dev", "https://admin.shoc.dev", "https://identity.shoc.dev"]
     redirectPaths: ["/signed-in", "/signed-in-silent.html", "/api/auth/callback/shoc"]
     postLogoutRedirectPaths: ["/signed-out", "/"]
+  m2m:
+    clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
+    clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
 
 extraEnvs:
   - name: provider-interactive-setup-configmap
