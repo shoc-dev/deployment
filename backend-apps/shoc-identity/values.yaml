@@ -20,6 +20,13 @@ apiDiscovery:
   pathRouting: false 
   root: identity.shoc.dev
 
+ingress:
+  simple: true
+  host: identity.shoc.dev
+  service: shoc-identity 
+  nginx:
+    bodySize: "0"
+
 identity:
   interactive:
     accessTokenExpiration: 300

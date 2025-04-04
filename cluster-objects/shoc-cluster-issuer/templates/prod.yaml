@@ -7,7 +7,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: {{ .Values.certManager.email }}
     privateKeySecretRef:
-      name: "{{ .Chart.name }}-prod-account-key"
+      name: "{{ .Chart.Name }}-prod-account-key"
     {{- if .Values.certManager.solver.http01.enabled }}
     solvers:
     - http01:
@@ -21,6 +21,6 @@ spec:
           email: {{ .Values.certManager.solver.dns01.cloudflare.email }}
           apiTokenSecretRef:
             name: "{{ .Chart.Name }}-cf-api-token"
-            key: api-token
+            key: apiToken
         {{- end }}
     {{- end }}

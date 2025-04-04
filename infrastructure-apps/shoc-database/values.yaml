@@ -16,9 +16,7 @@ deployment:
 database:
   storage: 10Gi
   storageClass: "shoc-local-storage"
-
-discovery:
-  enabled: false
-
-apiDiscovery:
-  enabled: false
+  setup:
+    username: ${SHOC_DATABASE_USERNAME}
+    password: ${SHOC_DATABASE_PASSWORD}
+    rootPassword: ${SHOC_DATABASE_ROOT_PASSWORD}

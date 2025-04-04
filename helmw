@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Wrapper script for Helm that includes specific values files with envsubst
+
+# Ensure Helm is installed
+if ! command -v helm &> /dev/null; then
+    echo "Error: Helm is not installed." >&2
+    exit 1
+fi
+
+# Ensure envsubst is installed
+if ! command -v envsubst &> /dev/null; then
+    echo "Error: envsubst is not installed." >&2
+    exit 1
+fi
+
+# Define the values files to include
+COMMON_VALUES_FILE="../common/values.yaml"
+BASE_VALUES_FILE="base/values.yaml"
+CHART_VALUES_FILE="$2/values.yaml"
+
+# Check if the required values files exist
+for file in "$COMMON_VALUES_FILE" "$BASE_VALUES_FILE" "$CHART_VALUES_FILE"; do
+    if [ ! -f "$file" ]; then
+        echo "Error: Required values file '$file' not found." >&2
+        exit 1
+    fi
+done
+
+# Create temporary files for the processed values
+COMMON_VALUES_TEMP=$(mktemp)
+BASE_VALUES_TEMP=$(mktemp)
+CHART_VALUES_TEMP=$(mktemp)
+
+# Ensure temporary files are cleaned up on exit
+trap 'rm -f "$COMMON_VALUES_TEMP" "$BASE_VALUES_TEMP" "$CHART_VALUES_TEMP"' EXIT
+
+# Substitute environment variables into the values files
+envsubst < "$COMMON_VALUES_FILE" > "$COMMON_VALUES_TEMP"
+envsubst < "$BASE_VALUES_FILE" > "$BASE_VALUES_TEMP"
+envsubst < "$CHART_VALUES_FILE" > "$CHART_VALUES_TEMP"
+
+# Run Helm with the provided arguments and the additional values files
+helm "$1" "$2" \
+    --values "$COMMON_VALUES_TEMP" \
+    --values "$BASE_VALUES_TEMP" \
+    --values "$CHART_VALUES_TEMP" \
+    "${@:3}"

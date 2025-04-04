@@ -1,22 +1,8 @@
-addresses:
-  root: shoc.dev
-  identity: identity.shoc.dev
-  api: api.shoc.dev
-  admin: admin.shoc.dev
-
 apiDiscovery:
   enabled: true
   protocol: https
   pathRouting: true 
   root: api.shoc.dev
-
-image:
-  repository: shoc/shoc/public
-  pullPolicy: IfNotPresent
-  tag: ${SHOC_VERSION}
-  pullSecretEnabled: true
-  registry:
-    name: ghcr.io
 
 deployment: 
   simple: true
@@ -26,12 +12,6 @@ service:
 
 container:
   restartPolicy: Always
-
-database:
-  setup:
-    username: ${SHOC_DATABASE_USERNAME}
-    password: ${SHOC_DATABASE_PASSWORD}
-    rootPassword: ${SHOC_DATABASE_ROOT_PASSWORD}
 
 datasource:
   enabled: true
@@ -58,5 +38,3 @@ mailing:
   enabled: true
   defaultProfile: default
 
-scaling:
-  replicaCount: 1

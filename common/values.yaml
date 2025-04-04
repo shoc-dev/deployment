@@ -1,0 +1,20 @@
+addresses:
+  root: shoc.dev
+  identity: identity.shoc.dev
+  api: api.shoc.dev
+  admin: admin.shoc.dev
+
+image:
+  repository: shoc/shoc/public
+  pullPolicy: IfNotPresent
+  tag: ${SHOC_VERSION}
+  pullSecretEnabled: true
+  registry:
+    name: ghcr.io
+
+ingress:
+  clusterIssuer: shoc-cluster-issuer-prod
+  port: http
+
+scaling:
+  replicaCount: 1

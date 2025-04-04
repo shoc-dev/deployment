@@ -6,5 +6,5 @@ metadata:
   namespace: cert-manager
 type: Opaque
 data:
-  api-token: {{ .Values.certManager.solver.dns01.cloudflare.apiToken | b64enc }}
+  apiToken: {{ .Values.certManager.solver.dns01.cloudflare.apiToken | b64enc }}
 {{- end }}
