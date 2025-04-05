@@ -1,0 +1,3 @@
+{{- if .Values.apiDiscovery.enabled }}
+{{- include "service-commons.api-discovery-configmap" . }}
+{{- end }}

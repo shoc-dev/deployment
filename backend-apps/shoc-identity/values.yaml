@@ -28,7 +28,7 @@ ingress:
     bodySize: "0"
 
 mailing:
-  enabled: false
+  enabled: true
 
 identity:
   interactive:

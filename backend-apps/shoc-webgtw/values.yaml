@@ -1,0 +1,31 @@
+container:
+  ports:
+    - name: http
+      containerPort: 11100
+
+service:
+  ports:
+    - name: http
+      port: 11100
+      targetPort: http  
+      protocol: TCP
+
+apiDiscovery:
+  pathRouting: false 
+  root: api.shoc.dev
+
+ingress:
+  simple: true
+  host: api.shoc.dev
+  service: shoc-webgtw 
+  nginx:
+    bodySize: "0"
+
+datasource:
+  enabled: false
+
+auth:
+  enabled: false
+
+apiClient:
+  enabled: false

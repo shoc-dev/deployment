@@ -1,0 +1,11 @@
+apiVersion: v2
+name: shoc-job
+description: A Helm chart for shoc-job deployment
+type: application
+version: 0.0.1
+appVersion: "1.0.0"
+
+dependencies:
+  - name: service-commons
+    version: "0.0.1"
+    repository: "file://../../library/service-commons" 

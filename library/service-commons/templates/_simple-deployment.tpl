@@ -35,7 +35,7 @@ spec:
           env:
             {{- if .Values.discovery.enabled }}
             - configMapRef:
-                name: {{ .Chart.Name }}-discover-configmap
+                name: {{ .Chart.Name }}-discovery-configmap
             {{- end }}
             {{- if .Values.auth.enabled }}
             - configMapRef:

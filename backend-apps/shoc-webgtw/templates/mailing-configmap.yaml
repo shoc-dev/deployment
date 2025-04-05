@@ -1,0 +1,3 @@
+{{- if .Values.mailing.enabled }}
+{{- include "service-commons.mailing-configmap" . }}
+{{- end }}

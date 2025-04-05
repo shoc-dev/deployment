@@ -5,9 +5,9 @@ addresses:
   admin: admin.shoc.dev
 
 image:
-  repository: shoc/shoc/public
+  repository: imastio/shoc/public
   pullPolicy: IfNotPresent
-  tag: ${SHOC_VERSION}
+  tag: "abc"
   pullSecretEnabled: true
   registry:
     name: ghcr.io

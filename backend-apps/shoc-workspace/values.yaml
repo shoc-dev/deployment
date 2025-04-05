@@ -1,0 +1,17 @@
+container:
+  ports:
+    - name: http
+      containerPort: 11122
+    - name: grpc
+      containerPort: 11124
+
+service:
+  ports:
+    - name: http
+      port: 11122
+      targetPort: http  
+      protocol: TCP
+    - name: grpc
+      port: 11124
+      targetPort: grpc  
+      protocol: TCP
