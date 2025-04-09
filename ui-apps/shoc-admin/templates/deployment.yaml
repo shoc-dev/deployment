@@ -1,0 +1,3 @@
+{{- if and .Values.deployment (eq .Values.deployment.template "next")  }}
+{{- include "service-commons.next-deployment" . }}
+{{- end }}

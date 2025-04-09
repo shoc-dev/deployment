@@ -1,4 +1,4 @@
-{{- define "service-commons.simple-service" -}}
+{{- define "service-commons.default-service" -}}
 apiVersion: v1
 kind: Service
 

@@ -1,4 +1,4 @@
-{{- define "service-commons.simple-ingress" -}}
+{{- define "service-commons.default-ingress" -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

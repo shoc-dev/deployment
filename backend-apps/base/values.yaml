@@ -1,40 +1,37 @@
-apiDiscovery:
-  enabled: true
-  protocol: https
-  pathRouting: true 
-  root: api.shoc.dev
-
 deployment: 
-  simple: true
+  template: "microservice"
 
 service:
-  simple: true
+  template: "default"
 
-container:
-  restartPolicy: Always
-
-datasource:
-  enabled: true
-  server: "shoc-database"
-  port: 11001
-  username: ${SHOC_DATABASE_USERNAME}
-  password: ${SHOC_DATABASE_PASSWORD}
-  database: ${SHOC_DATABASE_NAME}
-
-apiClient:
-  enabled: true
-  clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
-  clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
-
-discovery:
-  enabled: true
-  type: static
-  static:
-    hostingType: docker
-    defaultProtocol: http
-    defaultGrpcProtocol: http
-
-mailing:
-  enabled: false
-  defaultProfile: default
-
+microservice:
+  discovery:
+    enabled: true
+    type: static
+    static:
+      hostingType: docker
+      defaultProtocol: http
+      defaultGrpcProtocol: http
+  apiDiscovery:
+    enabled: true
+    protocol: https
+    pathRouting: true 
+    root: api.shoc.dev
+  apiAuth:
+    enabled: true
+    authority: https://identity.shoc.dev/
+    allowInsecure: "false"
+  apiClient:
+    enabled: true
+    clientId: ${SHOC_DEFAULT_M2M_CLIENT_ID}
+    clientSecret: ${SHOC_DEFAULT_M2M_CLIENT_SECRET}
+  mailing:
+    enabled: false
+    defaultProfile: default
+  datasource:
+    enabled: true
+    server: "shoc-database"
+    port: 11001
+    username: ${SHOC_DATABASE_USERNAME}
+    password: ${SHOC_DATABASE_PASSWORD}
+    database: ${SHOC_DATABASE_NAME}

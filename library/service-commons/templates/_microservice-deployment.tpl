@@ -1,4 +1,4 @@
-{{- define "service-commons.simple-deployment" -}}
+{{- define "service-commons.microservice-deployment" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -33,29 +33,29 @@ spec:
               {{- end }}
             {{- end }}
           env:
-            {{- if .Values.discovery.enabled }}
+            {{- if and .Values.microservice.discovery .Values.microservice.discovery.enabled }}
             - configMapRef:
-                name: {{ .Chart.Name }}-discovery-configmap
+                name: {{ .Chart.Name }}-microservice-discovery-configmap
             {{- end }}
-            {{- if .Values.auth.enabled }}
+            {{- if and .Values.microservice.apiDiscovery .Values.microservice.apiDiscovery.enabled }}
             - configMapRef:
-                name: {{ .Chart.Name }}-api-auth-configmap
+                name: {{ .Chart.Name }}-microservice-api-discovery-configmap
             {{- end }}
-            {{- if .Values.apiDiscovery.enabled }}
+            {{- if and .Values.microservice.apiAuth .Values.microservice.apiAuth.enabled }}
             - configMapRef:
-                name: {{ .Chart.Name }}-api-discovery-configmap
+                name: {{ .Chart.Name }}-microservice-api-auth-configmap
             {{- end }}
-            {{- if .Values.mailing.enabled }}
-            - configMapRef:
-                name: {{ .Chart.Name }}-mailing-configmap
-            {{- end }}
-            {{- if .Values.datasource.enabled }}
+            {{- if and .Values.microservice.apiClient .Values.microservice.apiClient.enabled }}
             - secretRef:
-                name: {{ .Chart.Name }}-datasource-secret
+                name: {{ .Chart.Name }}-microservice-api-client-secret
             {{- end }}
-            {{- if .Values.apiClient.enabled }}
+            {{- if and .Values.microservice.mailing .Values.microservice.mailing.enabled }}
+            - configMapRef:
+                name: {{ .Chart.Name }}-microservice-mailing-configmap
+            {{- end }}
+            {{- if and .Values.microservice.datasource .Values.microservice.datasource.enabled }}
             - secretRef:
-                name: {{ .Chart.Name }}-api-client-secret
+                name: {{ .Chart.Name }}-microservice-datasource-secret
             {{- end }}
             {{- range .Values.extraEnvs }}
             {{- $envName := .name -}}

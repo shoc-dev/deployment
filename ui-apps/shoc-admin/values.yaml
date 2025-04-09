@@ -1,0 +1,18 @@
+container:
+  ports:
+    - name: http
+      containerPort: 11052
+
+service:
+  ports:
+    - name: http
+      port: 11052
+      targetPort: http  
+      protocol: TCP
+
+ingress:
+  template: "default"
+  host: admin.shoc.dev
+  service: shoc-admin 
+  nginx:
+    bodySize: "0"

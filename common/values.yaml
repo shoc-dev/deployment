@@ -13,14 +13,18 @@ image:
     name: ghcr.io
 
 ingress:
-  simple: false
+  template: "none"
   clusterIssuer: shoc-cluster-issuer-prod
   port: http
 
-auth:
-  enabled: true
-  authority: https://identity.shoc.dev/
-  allowInsecure: "false"
+service:
+  template: "none"
+
+deployment:
+  template: "none"
+
+container:
+  restartPolicy: Always
   
 scaling:
   replicaCount: 1

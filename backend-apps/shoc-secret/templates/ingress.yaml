@@ -1,3 +1,0 @@
-{{- if .Values.ingress.simple }}
-{{- include "service-commons.simple-ingress" . }}
-{{- end }}

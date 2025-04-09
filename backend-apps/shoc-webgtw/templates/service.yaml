@@ -1,3 +1,3 @@
-{{- if .Values.service.simple }}
-{{- include "service-commons.simple-service" . }}
+{{- if and .Values.service (eq .Values.service.template "default")  }}
+{{- include "service-commons.default-service" . }}
 {{- end }}

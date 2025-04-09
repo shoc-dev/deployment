@@ -9,9 +9,6 @@ service:
       port: 11001
       targetPort: mysql  
       protocol: TCP
-
-deployment:
-  simple: false
   
 database:
   storage: 10Gi

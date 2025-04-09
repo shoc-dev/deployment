@@ -10,22 +10,20 @@ service:
       targetPort: http  
       protocol: TCP
 
-apiDiscovery:
-  pathRouting: false 
-  root: api.shoc.dev
-
 ingress:
-  simple: true
+  template: "default"
   host: api.shoc.dev
   service: shoc-webgtw 
   nginx:
     bodySize: "0"
 
-datasource:
-  enabled: false
-
-auth:
-  enabled: false
-
-apiClient:
-  enabled: false
+microservice:
+  apiDiscovery:
+    pathRouting: false 
+    root: api.shoc.dev
+  apiAuth:
+    enabled: false
+  apiClient:
+    enabled: false
+  datasource:
+    enabled: false

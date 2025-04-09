@@ -16,19 +16,19 @@ service:
       targetPort: grpc  
       protocol: TCP
 
-apiDiscovery:
-  pathRouting: false 
-  root: identity.shoc.dev
-
 ingress:
-  simple: true
+  template: "default"
   host: identity.shoc.dev
   service: shoc-identity 
   nginx:
     bodySize: "0"
-
-mailing:
-  enabled: true
+    
+microservice:
+  apiDiscovery:
+    pathRouting: false 
+    root: identity.shoc.dev
+  mailing:
+    enabled: true
 
 identity:
   interactive:
